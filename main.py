@@ -50,7 +50,7 @@ X = modified_data.drop('wage_eur', inplace=False, axis=1)
 
 scaler = preprocessing.StandardScaler()
 
-scaledX = scaler.fit_transform(X)
+scaledX = scaler.fit_transform(X).astype('float32')
 
 
 
@@ -75,5 +75,5 @@ print(clf.best_params_)
 #{'C': 3, 'kernel': 'rbf', 'max_iter': 100000}
 
 kernel = 1.0 * RBF(1.0)
-gpc = GaussianProcessClassifier(kernel=kernel, random_state=0).fit(X,y)
-print(gpc.score(X,y))
+gpc = GaussianProcessClassifier(kernel=kernel, random_state=0).fit(scaledX,y)
+print(gpc.score(scaledX,y))
